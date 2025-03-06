@@ -1,44 +1,206 @@
-#app {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px;
-    background-color: #e8f0fe;
-    min-height: 600px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgba(181, 227, 253, 0.89);
+    color: #002b75;
+    margin: 0;
+    padding: 0;
 }
 
-.column {
+#task-manager-app {
+    display: flex;
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: rgba(156, 210, 255, 0.84);
+    border-radius: 10px;
+}
+.task-creator {
+    background-color: rgba(156, 191, 255, 0.84);
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    margin-right: 30px;
+}
+
+h2, h3 {
+    color: #002b75;
+    text-transform: uppercase;
+    margin: 10px 0;
+}
+
+.task-creator label {
+    display: block;
+    color: #002b75;
+    margin-bottom: 5px;
+}
+
+.task-creator input,
+.task-creator textarea {
+    width: 280px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #468da6;
+    border-radius: 5px;
+    background-color: #b0cbff;
+    color: rgba(47, 119, 159, 0.98);
+}
+
+.task-creator button {
+    background-color: #2371af;
+    color: rgba(156, 191, 255, 0.84);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.task-creator button:hover {
+    background-color: rgba(41, 80, 154, 0.84);
+}
+
+.task-creator button:disabled {
+    background-color: #a3a3a3;
+    cursor: not-allowed;
+}
+
+
+.task-board {
     display: flex;
     flex-direction: column;
-    width: 15%;
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    overflow-y: auto; /* Добавляем прокрутку, если карточек много */
+    flex: 1;
+    gap: 20px;
 }
 
-.column h2 {
-    text-align: center;
-    color: #6a1b9a;
-    margin-bottom: 15px;
-}
-button {
-    background-color: #9575cd;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 14px;
-    margin-top: 10px;
-}
 
-button:hover {
-    background-color: #6a1b9a;
-}
-form input, form textarea {
-    width: 100%;
-    padding: 5px;
+.task-board h2 {
+    border-bottom: 2px solid #002b75;
+    padding-bottom: 5px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+}
+
+
+.task-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.task-list li {
+    background-color: rgba(104, 148, 228, 0.84);
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.task-item {
+    color: rgba(216, 240, 255, 0.84);
+}
+
+.task-item h3 {
+    margin-top: 0;
+    color: #002b75;
+}
+
+.task-item button {
+    background-color: #2371af;
+    color: rgb(255, 255, 255);
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.task-item button:hover {
+    background-color: rgba(41, 80, 154, 0.84);;
+}
+
+.task-item button:disabled {
+    background-color: #a3a3a3;
+    cursor: not-allowed;
+}
+
+.task-item .task-item input,
+.task-item .task-item textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #002b75;
+    border-radius: 5px;
+    background-color: rgba(117, 151, 213, 0.84);
+    color: #fff;
+}
+
+.task-item p {
+    margin: 5px 0;
+}
+
+.task-item em {
+    color: rgba(156, 210, 255, 0.84);
+}
+
+.task-item strong {
+    color: rgba(255, 64, 64, 0.68);
+}
+
+.task-item .task-item .completed p {
+    color: rgba(86, 195, 74, 0.88);
+}
+
+.task-item div textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: rgba(181, 227, 253, 0.89);
+    color: #fff;
+}
+
+.task-item .return-reason button {
+    background-color: rgba(255, 64, 64, 0.68);
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.task-item .return-reason button:hover {
+    background-color: rgba(165, 32, 32, 0.68);
+}
+
+h1{
+    width: 300px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+    #task-manager-app {
+        flex-direction: column;
+    }
+
+    .task-creator {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .task-board {
+        flex-direction: column;
+    }
+
+    .task-list {
+        margin-bottom: 20px;
+    }
+
+    .task-item button,
+    .task-creator button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }
