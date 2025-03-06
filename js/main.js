@@ -12,7 +12,10 @@ new Vue({
         tasks: [], // Запланированные задачи
         inProgressTasks: [], // Задачи в работе
         testingTasks: [], // Тестирование
-        completedTasks: [] // Выполненные задачи
+        completedTasks: [], // Выполненные задачи
+        showReturnForm: false, // Флаг для формы возврата
+        returnTaskIndex: null, // Индекс задачи для возврата
+        returnReason: '' // Причина возврата
     },
     methods: {
         openForm() {
@@ -51,6 +54,7 @@ new Vue({
         editTask(index) {
             this.isEditing = true; // Включаем режим редактирования
             this.editIndex = index; // Сохраняем индекс задачи для редактирования
+            // Копируем данные задачи в форму для редактирования
             const taskToEdit = this.tasks[index];
             this.newTask = {
                 title: taskToEdit.title,
@@ -63,8 +67,38 @@ new Vue({
             this.tasks.splice(index, 1); // Удаляем задачу из первого столбца
         },
         moveToInProgress(index) {
-            const task = this.tasks.splice(index, 1)[0]; // Удаляем задачу из первого столбца
-            this.inProgressTasks.push(task); // Добавляем задачу во второй столбец
+            const task = this.tasks.splice(index, 1)[0]; // Удаляем задачу из "Запланированные задачи"
+            this.inProgressTasks.push(task); // Добавляем задачу в "Задачи в работе"
+        },
+        moveToTesting(index) {
+            const task = this.inProgressTasks.splice(index, 1)[0]; // Удаляем задачу из "Задачи в работе"
+            this.testingTasks.push(task); // Добавляем задачу в "Тестирование"
+        },
+        moveToCompleted(index) {
+            const task = this.testingTasks.splice(index, 1)[0]; // Удаляем задачу из "Тестирование"
+            this.completedTasks.push(task); // Добавляем задачу в "Выполненные задачи"
+        },
+        openReturnForm(index) {
+            this.showReturnForm = true; // Показываем форму возврата
+            this.returnTaskIndex = index; // Сохраняем индекс задачи для возврата
+            this.returnReason = ''; // Очищаем причину возврата
+        },
+        closeReturnForm() {
+            this.showReturnForm = false; // Скрываем форму возврата
+            this.returnTaskIndex = null; // Сбрасываем индекс задачи
+            this.returnReason = ''; // Очищаем причину возврата
+        },
+        returnTaskToInProgress() {
+            if (!this.returnReason.trim()) {
+                alert('Укажите причину возврата!');
+                return;
+            }
+
+            const task = this.testingTasks.splice(this.returnTaskIndex, 1)[0]; // Удаляем задачу из "Тестирование"
+            task.returnReason = this.returnReason; // Добавляем причину возврата к задаче
+            this.inProgressTasks.push(task); // Добавляем задачу в "Задачи в работе"
+
+            this.closeReturnForm(); // Закрываем форму
         }
     }
 });
