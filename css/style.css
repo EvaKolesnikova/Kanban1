@@ -1,0 +1,44 @@
+#app {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #ecb9e7;
+    min-height: 600px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: 13%;
+    background-color: #f6d7f3;
+    border-radius: 25px;
+    padding: 30px;
+    overflow-y: auto; /* Добавляем прокрутку, если карточек много */
+}
+
+.column h2 {
+    text-align: center;
+    color: #ec5dde;
+    margin-bottom: 15px;
+}
+button {
+    background-color: #ecb9e7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #6a1b9a;
+}
+form input, form textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
